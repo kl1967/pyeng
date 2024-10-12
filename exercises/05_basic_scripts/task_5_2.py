@@ -30,6 +30,20 @@ Out[1]: '11111111111111111111111111110000'
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 """
-add = input("Введите IP адрес в формате 10.1.1.0/24")
+add = input("Введите IP адрес в формате 10.1.1.0/24  ")
 add_l1=add.split("/")
-print add_l1
+add_l2=add_l1[0].split('.')
+mask_2 = str('1'*int(add_l1[1],10)+'0'*(32-int(add_l1[1],10)))
+mask_10=[]
+mask_10.append(mask_2[:8])
+mask_10.append(mask_2[8:16])
+mask_10.append(mask_2[16:24])
+mask_10.append(mask_2[24:])
+print('Network')
+print("{0:<10}{1:<10}{2:<10}{3:<10}".format(add_l2[0],add_l2[1],add_l2[2],add_l2[3],))
+print("{0:08b}  {1:08b}  {2:08b}  {3:08b}".format(int(add_l2[0]),int(add_l2[1]),int(add_l2[2]),int(add_l2[3],)))
+#print('\n')
+print('Mask')
+print('/'+add_l1[1])
+print("{0:<10}{1:<10}{2:<10}{3:<10}".format(int(mask_10[0],2),int(mask_10[1],2),int(mask_10[2],2),int(mask_10[3],2)))
+print("{0:<8}  {1:<8}  {2:<8}  {3:<8}".format(mask_10[0],mask_10[1],mask_10[2],mask_10[3]))

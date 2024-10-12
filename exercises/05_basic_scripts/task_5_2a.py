@@ -49,3 +49,35 @@ bin_ip = "00001010000000010000000111000011"
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+#add = input("Введите IP адрес в формате 10.1.1.0/24  ")
+add="192.168.1.100/28"
+add_l1=add.split("/")
+print(add_l1)
+add_l2=add_l1[0].split('.')
+
+print(add_l2)
+#add_bin=bin(int(add_l2[0]))[2:]+bin(int(add_l2[1]))[2:]+bin(int(add_l2[2]))[2:]+bin(int(add_l2[3]))[2:]
+add_bin='{:08b}'.format(int(add_l2[0]))+'{:08b}'.format(int(add_l2[1]))+'{:08b}'.format(int(add_l2[2]))+'{:08b}'.format(int(add_l2[3]))
+i=int(add_l1[1],10)
+net_bin=add_bin[:int(add_l1[1],10)] +'0'*(32-int(add_l1[1]))
+print(add_bin)
+print(i)
+print(net_bin)
+
+mask_2 = str('1'*int(add_l1[1],10)+'0'*(32-int(add_l1[1],10)))
+#print(mask_2)
+mask_10=[]
+mask_10.append(mask_2[:8])
+mask_10.append(mask_2[8:16])
+mask_10.append(mask_2[16:24])
+mask_10.append(mask_2[24:])
+#print(mask_10)
+
+print('Network')
+print("{0:<10}{1:<10}{2:<10}{3:<10}".format(int(net_bin[:8],2),int(net_bin[8:16],2),int(net_bin[16:24],2),int(net_bin[24:],2)))
+print("{0:<8}  {1:<8}  {2:<8}  {3:8}".format(net_bin[:8],net_bin[8:16],net_bin[16:24],net_bin[24:]))
+print('\n')
+print('Mask')
+print('/'+add_l1[1])
+print("{0:<10}{1:<10}{2:<10}{3:<10}".format(int(mask_10[0],2),int(mask_10[1],2),int(mask_10[2],2),int(mask_10[3],2)))
+print("{0:<8}  {1:<8}  {2:<8}  {3:<8}".format(mask_10[0],mask_10[1],mask_10[2],mask_10[3]))
